@@ -28,18 +28,18 @@
           id="search"
           name="city"
         />
+        <div class="invalid-feedback">Input must be a city on Earth.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <table class="table table-hover table-bordered">
         <tbody id="dropdown"></tbody>
       </table>
-      <button class="btn btn-primary btn-lg">Submit</button>
+      <button class="btn btn-primary btn-lg" id="submit">Submit</button>
     </div>
 
-    
     <!-- Bootstrap JavaScript -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./dropdown.js"></script>
-    <script src="./latlong.js"></script>
-    
+    <script type="module" src="./dropdown.js"></script>
+    <script type="module" src="./latlong.js"></script>
   </body>
 </html>

@@ -1,15 +1,4 @@
-let cities;
-let isDataLoaded = false;
-
-(async function getCities() {
-  try {
-    const res = await fetch('./cities.json');
-    cities = await res.json();
-    isDataLoaded = true;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-})();
+import { cities, isDataLoaded } from './getCities.js';
 
 const input = document.getElementById('search');
 const dropdown = document.getElementById('dropdown');
@@ -25,7 +14,7 @@ function updateDropdown() {
     dropdown.classList.add('d-none');
   }
 
-  if (!cities) {
+  if (!isDataLoaded) {
     dropdown.innerHTML = 'Data is not loaded yet. Please wait.';
   }
 
@@ -50,7 +39,10 @@ function updateDropdown() {
   dropdown.classList.remove('d-none');
 }
 
-input.addEventListener('input', () => updateDropdown());
+input.addEventListener('input', () => {
+  updateDropdown();
+  input.classList.remove('is-invalid');
+});
 
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.autocomplete-container')) {
