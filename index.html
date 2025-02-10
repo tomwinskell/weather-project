@@ -13,6 +13,7 @@
   </head>
   <body>
     <div class="container mt-5">
+      <div class="container mx-auto" id="currentWx"></div>
       <div class="input-group input-group-lg mb-3">
         <span class="input-group-text" id="inputGroup-sizing-lg"
           >Enter City</span
@@ -21,7 +22,7 @@
           autofocus
           autocomplete="off"
           type="text"
-          class="form-control"
+          class="form-control rounded-end"
           placeholder="Start typing to search..."
           aria-label="Search input"
           aria-describedby="inputGroup-sizing-lg"
@@ -39,7 +40,8 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="./dropdown.js"></script>
-    <script type="module" src="./latlong.js"></script>
+    <script type="module" src="app.js"></script>
+    <!-- <script type="module" src="./dropdown.js"></script>
+    <script type="module" src="./latlong.js"></script> -->
   </body>
 </html>
