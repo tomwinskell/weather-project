@@ -57,6 +57,7 @@ function handleSubmit() {
       renderWx(await getCurrentWx(validInput), validInput);
     })();
   }
+  input.value = '';
 }
 
 export { input, dropdown };
