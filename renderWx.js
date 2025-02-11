@@ -6,6 +6,7 @@ import {
 import { toLocalTime } from './getWx.js';
 import { daysOfWeek, monthsOfYear } from './dtStrings.js';
 import { forecastButton } from './elementScripts.js';
+import { toTitleCase } from './helperFunctions.js';
 
 const currentWxDiv = document.getElementById('currentWx');
 
@@ -40,7 +41,7 @@ function buildWeatherObject(data, cityName) {
   return {
     icon: weather[0].icon,
     cityName: cityName,
-    description: weather[0].description,
+    description: toTitleCase(weather[0].description),
     temperature: main.temp,
   };
 }
@@ -54,8 +55,8 @@ function buildForecastObject(data) {
     struct.push({
       icon: current.weather[0].icon,
       dateString: dateString,
-      description: current.weather[0].description,
-      temperature: current.main.temp
+      description: toTitleCase(current.weather[0].description),
+      temperature: current.main.temp,
     });
     return struct;
   }, []);
