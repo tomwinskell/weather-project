@@ -51,16 +51,14 @@ function buildForecastObject(data) {
     const dateString = `${daysOfWeek[localTime.getDay()]}, ${
       monthsOfYear[localTime.getMonth()]
     } ${localTime.getDate()}`;
-    struct += `
-    <div class="col">
-      <img src="https://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png" class="img-fluid" alt="...">
-      <h5 class="card-title">${dateString}</h5>
-      <p class="card-text">${current.weather[0].description}</p>
-      <p class="card-text">${current.main.temp} degrees Celsius</p>
-    </div>
-    `;
+    struct.push({
+      icon: current.weather[0].icon,
+      dateString: dateString,
+      description: current.weather[0].description,
+      temperature: current.main.temp
+    });
     return struct;
-  }, '');
+  }, []);
 }
 
 export { renderWx };
