@@ -3,6 +3,7 @@ import fetchData from './fetchData.js';
 import { validateInput, isLoaded } from './validation.js';
 import { getCurrentWx } from './getWx.js';
 import { renderWx } from './renderWx.js';
+import { deviceCoords } from './geoLocation.js';
 
 const input = document.getElementById('search');
 const dropdown = document.getElementById('dropdown');
@@ -15,9 +16,16 @@ async function main() {
   cities = await fetchData(true, './cities.json');
 }
 
+deviceCoords();
 main();
 
-input.addEventListener('input', () => {
+input.addEventListener('input', () => handleInput());
+
+input.addEventListener('keyup', (e) => e.key === 'Enter' && handleSubmit());
+
+button.addEventListener('click', () => handleSubmit());
+
+function handleInput() {
   const query = input.value.toLowerCase();
   // clear previous results
   dropdown.innerHTML = '';
@@ -30,27 +38,10 @@ input.addEventListener('input', () => {
   }
   renderDropdown(filter(cities.data, query));
   input.classList.remove('is-invalid');
-});
+}
 
-// document.addEventListener('click', (e) => {
-//   if (!e.target.closest('.table')) {
-//     dropdown.classList.add('d-none');
-//   }
-// });
-
-input.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') {
-    handleSubmit();
-  }
-});
-
-button.addEventListener('click', () => {
-  handleSubmit();
-});
-
-function handleSubmit() {
+function handleSubmit(query = input.value.toLowerCase()) {
   dropdown.classList.add('d-none');
-  const query = input.value.toLowerCase();
   const validInput = validateInput(cities.data, query);
   if (validInput) {
     (async () => {
