@@ -1,20 +1,24 @@
 import { API_KEY } from './config.js';
 import fetchData from './fetchData.js';
 
-async function getCurrentWx(city) {
-  const latLong = await fetchData(
+async function getLatLon(city) {
+  const latLon = await fetchData(
     city,
     `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`
   );
-  let { lat, lon } = latLong.data[0];
+  return { lat: latLon.data[0].lat, lon: latLon.data[0].lon };
+}
+
+async function getWxData(latLon) {
+  let { lat, lon } = latLon;
   lat = lat.toFixed(2);
   lon = lon.toFixed(2);
   const wx = await fetchData(
-    latLong,
+    latLon,
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
   );
   const fx = await fetchData(
-    latLong,
+    latLon,
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
   );
   return {
@@ -39,4 +43,4 @@ function toLocalTime(timestamp, timezoneOffset) {
   return new Date((timestamp + timezoneOffset) * 1000);
 }
 
-export { getCurrentWx, toLocalTime };
+export { getLatLon, getWxData, toLocalTime };

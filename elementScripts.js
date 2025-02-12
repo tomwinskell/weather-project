@@ -1,6 +1,8 @@
+import { weatherData } from './app.js';
+
 function forecastButton() {
-  const collapseEl = document.getElementById('collapseForecast');
-  const button = collapseEl.previousElementSibling;
+  const collapseEl = document.getElementById('collapseEl');
+  const button = document.getElementById('collapseBtn');
   button.addEventListener('click', () => {
     if (collapseEl.classList.contains('d-none')) {
       collapseEl.classList.remove('d-none');
@@ -14,4 +16,24 @@ function forecastButton() {
   });
 }
 
-export { forecastButton };
+function defaultButton() {
+  const button = document.getElementById('setDefault');
+
+  button.addEventListener('click', () => {
+    setDefault(weatherData.weather.coord);
+    createToast('Location added as default.');
+  });
+
+  function setDefault(latLon) {
+    localStorage.setItem('latLon', JSON.stringify(latLon));
+  }
+}
+
+function createToast(message) {
+  const toast = document.getElementById('liveToast');
+  toast.querySelector('.toast-body').innerHTML = message;
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+  toastBootstrap.show();
+}
+
+export { forecastButton, defaultButton };

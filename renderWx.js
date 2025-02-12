@@ -5,7 +5,7 @@ import {
 } from './templateMethods.js';
 import { toLocalTime } from './getWx.js';
 import { daysOfWeek, monthsOfYear } from './dtStrings.js';
-import { forecastButton } from './elementScripts.js';
+import { forecastButton, defaultButton } from './elementScripts.js';
 import { toTitleCase } from './helperFunctions.js';
 
 const currentWxDiv = document.getElementById('currentWx');
@@ -15,7 +15,7 @@ async function renderWx(data, input) {
   currentWxDiv.innerHTML = '';
 
   await loadPopulateAppend(
-    buildWeatherObject(data, input),
+    buildWeatherObject(data, input ? input : data.weather.name),
     'weather',
     currentWxDiv
   );
@@ -27,6 +27,7 @@ async function renderWx(data, input) {
 
   // load scripts specific to elements just loaded to dom
   forecastButton();
+  defaultButton();
 }
 
 async function loadPopulateAppend(object, string, domElement) {

@@ -1,7 +1,7 @@
 import { renderDropdown, filter } from './dropdown.js';
 import fetchData from './fetchData.js';
 import { validateInput, isLoaded } from './validation.js';
-import { getCurrentWx } from './getWx.js';
+import { getWxData, getLatLon } from './getWx.js';
 import { renderWx } from './renderWx.js';
 import { deviceCoords } from './geoLocation.js';
 
@@ -10,13 +10,23 @@ const dropdown = document.getElementById('dropdown');
 const button = document.getElementById('submit');
 
 let cities;
+let weatherData;
 
 // load cities from json
 async function main() {
   cities = await fetchData(true, './cities.json');
+  renderOnLoad();
+
+  function renderOnLoad() {
+    const latLon = JSON.parse(localStorage.getItem('latLon'));
+    if (!latLon) {
+      deviceCoords();
+    } else {
+      handleSubmit(latLon);
+    }
+  }
 }
 
-deviceCoords();
 main();
 
 input.addEventListener('input', () => handleInput());
@@ -40,15 +50,19 @@ function handleInput() {
   input.classList.remove('is-invalid');
 }
 
-function handleSubmit(query = input.value.toLowerCase()) {
+async function handleSubmit(query = input.value.toLowerCase()) {
   dropdown.classList.add('d-none');
-  const validInput = validateInput(cities.data, query);
-  if (validInput) {
-    (async () => {
-      renderWx(await getCurrentWx(validInput), validInput);
-    })();
+  if (typeof query === 'string') {
+    const valid = validateInput(cities.data, query);
+    if (valid) {
+      weatherData = await getWxData(await getLatLon(valid));
+      renderWx(weatherData, valid);
+    }
+  } else if (typeof query === 'object') {
+    weatherData = await getWxData(query);
+    renderWx(weatherData);
   }
   input.value = '';
 }
 
-export { input, dropdown };
+export { input, dropdown, handleSubmit, weatherData };

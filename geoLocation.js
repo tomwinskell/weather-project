@@ -1,9 +1,14 @@
 import fetchData from './fetchData.js';
+import { handleSubmit } from './app.js';
 
 function deviceCoords() {
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
-      (p) => handleSubmit(p),
+      (position) => 
+      handleSubmit({
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      }),
       getIpapiLocation,
       {
         enableHighAccuracy: true,
@@ -12,14 +17,14 @@ function deviceCoords() {
       }
     );
   } else {
-    getIpapiLocation();
+    return getIpapiLocation();
   }
 }
 
 async function getIpapiLocation() {
   try {
     const res = await fetchData(true, 'https://ipapi.co/json/');
-    console.log(res.data.latitude, res.data.longitude);
+    handleSubmit({ lat: res.data.latitude, lon: res.data.longitude });
   } catch (error) {
     console.error('Error fetching IP-based location:', error);
   }
