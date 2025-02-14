@@ -9,4 +9,14 @@ function createToast(message) {
   toastBootstrap.show();
 }
 
-export { toTitleCase, createToast };
+function extractYearMonthDateDay(unixTimestamp) {
+  const date = new Date(unixTimestamp * 1000);
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    date: date.getDate(),
+    day: date.getDay(),
+  };
+}
+
+export { toTitleCase, createToast, extractYearMonthDateDay };

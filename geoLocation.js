@@ -1,14 +1,14 @@
 import fetchData from './fetchData.js';
-import { handleSubmit } from './app.js';
+import { handleSubmit } from './handlers.js';
 
 function deviceCoords() {
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
-      (position) => 
-      handleSubmit({
-        lat: position.coords.latitude,
-        lon: position.coords.longitude,
-      }),
+      (position) =>
+        handleSubmit({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        }),
       getIpapiLocation,
       {
         enableHighAccuracy: true,

@@ -1,4 +1,4 @@
-import { weatherData } from './app.js';
+import { weatherData } from './handlers.js';
 import { createToast } from './helperFunctions.js';
 
 function forecastButton() {

@@ -1,5 +1,4 @@
-import { toLocalTime } from './getWx.js';
-import { toTitleCase } from './helperFunctions.js';
+import { extractYearMonthDateDay, toTitleCase } from './helperFunctions.js';
 import { daysOfWeek, monthsOfYear } from './dtStrings.js';
 
 function buildWxObject(data) {
@@ -14,10 +13,8 @@ function buildWxObject(data) {
 
 function buildFxObject(data) {
   const output = data.forecast.reduce((struct, current) => {
-    const localTime = new Date(toLocalTime(current.dt, data.timezone));
-    const dateString = `${daysOfWeek[localTime.getDay()]}, ${
-      monthsOfYear[localTime.getMonth()]
-    } ${localTime.getDate()}`;
+    const { _, month, day, date } = extractYearMonthDateDay(current.dt);
+    const dateString = `${daysOfWeek[day]}, ${monthsOfYear[month]} ${date}`;
     struct.push({
       icon: current.weather[0].icon,
       dateString: dateString,

@@ -4,8 +4,8 @@ import {
   loadTemplate,
 } from './templateMethods.js';
 import { forecastButton, defaultButton } from './elementScripts.js';
-import { weatherData } from './app.js';
-import { buildFxObject, buildWxObject } from './mapWxObject.js';
+import { weatherData } from './handlers.js';
+import { buildFxObject, buildWxObject } from './buildObjects.js';
 
 const wxDiv = document.getElementById('wx');
 
