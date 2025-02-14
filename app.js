@@ -9,7 +9,9 @@ const input = document.getElementById('search');
 const dropdown = document.getElementById('dropdown');
 const button = document.getElementById('submit');
 
+// list of cities loaded from Json
 let cities;
+// weatherData from fetch
 let weatherData;
 
 // load cities from json
@@ -53,16 +55,22 @@ function handleInput() {
 async function handleSubmit(query = input.value.toLowerCase()) {
   dropdown.classList.add('d-none');
   if (typeof query === 'string') {
+    // validate the users input using list of cities
     const valid = validateInput(cities.data, query);
     if (valid) {
-      weatherData = await getWxData(await getLatLon(valid));
+      await setWeatherData(await getLatLon(valid));
       renderWx(weatherData, valid);
     }
   } else if (typeof query === 'object') {
-    weatherData = await getWxData(query);
+    await setWeatherData(query);
     renderWx(weatherData);
   }
   input.value = '';
+
+  // sets the global weather data variable
+  async function setWeatherData(latLon) {
+    weatherData = await getWxData(latLon);
+  }
 }
 
 export { input, dropdown, handleSubmit, weatherData };

@@ -1,4 +1,5 @@
 import { weatherData } from './app.js';
+import { createToast } from './helperFunctions.js';
 
 function forecastButton() {
   const collapseEl = document.getElementById('collapseEl');
@@ -20,20 +21,14 @@ function defaultButton() {
   const button = document.getElementById('setDefault');
 
   button.addEventListener('click', () => {
-    setDefault(weatherData.weather.coord);
-    createToast('Location added as default.');
+    const { coord, name } = weatherData.weather;
+    setDefault(coord, name);
   });
 
-  function setDefault(latLon) {
+  function setDefault(latLon, cityName) {
     localStorage.setItem('latLon', JSON.stringify(latLon));
+    createToast(`${cityName} added as default.`);
   }
-}
-
-function createToast(message) {
-  const toast = document.getElementById('liveToast');
-  toast.querySelector('.toast-body').innerHTML = message;
-  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
-  toastBootstrap.show();
 }
 
 export { forecastButton, defaultButton };
