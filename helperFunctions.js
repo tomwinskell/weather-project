@@ -12,10 +12,10 @@ function createToast(message) {
 function extractYearMonthDateDay(unixTimestamp) {
   const date = new Date(unixTimestamp * 1000);
   return {
-    year: date.getFullYear(),
-    month: date.getMonth(),
-    date: date.getDate(),
-    day: date.getDay(),
+    year: date.getUTCFullYear(),
+    month: date.getUTCMonth(),
+    date: date.getUTCDate(),
+    day: date.getUTCDay(),
   };
 }
 

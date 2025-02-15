@@ -14,6 +14,7 @@ function buildWxObject(data) {
 function buildFxObject(data) {
   const output = data.forecast.reduce((struct, current) => {
     const { _, month, day, date } = extractYearMonthDateDay(current.dt);
+
     const dateString = `${daysOfWeek[day]}, ${monthsOfYear[month]} ${date}`;
     struct.push({
       icon: current.weather[0].icon,
