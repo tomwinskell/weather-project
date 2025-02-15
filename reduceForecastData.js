@@ -26,7 +26,6 @@ function filterForMidday(dateObject, dataArray) {
   const closestIndex = getIndexClosestToMidday();
   // remove forecast items before midday
   const newArray = dataArray.slice(closestIndex);
-  console.log(newArray);
   // return 5 days
   return newArray.filter((item, index) => {
     if (index % 8 === 0) {
