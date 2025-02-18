@@ -1,4 +1,4 @@
-import { handleInput, handleSubmit, renderPage } from './handlers.js';
+import { handleInput, handleSubmit, renderPage } from './modules/handlers.js';
 import cities from '../assets/cities.json';
 
 const input = document.getElementById('search');

@@ -1,4 +1,4 @@
-import { WX_API_KEY } from './config.js';
+import { WX_API_KEY } from '../variables/config.js';
 import fetchData from './fetchData.js';
 import { reduceForecastData } from './reduceForecastData.js';
 

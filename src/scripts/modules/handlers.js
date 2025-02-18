@@ -2,7 +2,7 @@ import { validateInput, isLoaded } from './validation.js';
 import { getWxData, getLatLon } from './getWx.js';
 import { renderWx } from './renderWx.js';
 import { renderDropdown, filter } from './dropdown.js';
-import { input, cities } from './main.js';
+import { input, cities } from '../main.js';
 import { deviceCoords } from './geoLocation.js';
 
 // weatherData from fetch

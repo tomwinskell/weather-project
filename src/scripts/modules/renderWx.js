@@ -6,8 +6,8 @@ import {
 } from './elementScripts.js';
 import { weatherData } from './handlers.js';
 import { buildFxObject, buildWxObject } from './buildObjects.js';
-import weatherTemplate from '../templates/weather.html';
-import forecastTemplate from '../templates/forecast.html';
+import weatherTemplate from '../../templates/weather.html';
+import forecastTemplate from '../../templates/forecast.html';
 
 const wxDiv = document.getElementById('wx');
 

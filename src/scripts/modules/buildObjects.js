@@ -1,5 +1,5 @@
 import { extractYearMonthDateDay, toTitleCase } from './helperFunctions.js';
-import { daysOfWeek, monthsOfYear } from './dtStrings.js';
+import { daysOfWeek, monthsOfYear } from '../variables/dtStrings.js';
 
 function buildWxObject(data) {
   const { weather, main, name } = data.weather;

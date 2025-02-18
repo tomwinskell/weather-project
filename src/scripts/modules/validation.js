@@ -1,4 +1,4 @@
-import { input, dropdown } from './main.js';
+import { input, dropdown } from '../main.js';
 
 function validateInput(data, query) {
   // renders data not loaded message
