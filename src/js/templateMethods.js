@@ -1,26 +1,18 @@
-// pass filename, returns html as string
-async function loadTemplate(filename) {
-  const res = await fetch(`../templates/${filename}.html`);
-  return await res.text();
-}
-
 function populateTemplate(object, htmlAsString) {
   for (const key in object) {
     // if object key is array logic will look for loop
     if (Array.isArray(object[key])) {
       const keyString = `{{for ${key}}}`;
+      const endString = `{{end for}}`;
       const indexOfFirst = htmlAsString.indexOf(keyString);
-      const indexOfSecond = htmlAsString.indexOf(
-        `{{end for}}`,
-        indexOfFirst + 1
-      );
+      const indexOfSecond = htmlAsString.indexOf(endString, indexOfFirst + 1);
 
       // find and get for loop placeholder string from the html template
       function getLoopPlaceholder() {
         return htmlAsString
-          .substring(indexOfFirst, indexOfSecond + 12)
+          .substring(indexOfFirst, indexOfSecond + endString.length + 1)
           .replace(keyString, '')
-          .replace(`{{end for}}`, '');
+          .replace(endString, '');
       }
 
       // use object to populate for loop template
@@ -39,12 +31,13 @@ function populateTemplate(object, htmlAsString) {
         return (
           htmlAsString.slice(0, indexOfFirst) +
           fillLoopPlaceholder() +
-          htmlAsString.slice(indexOfSecond + keyString.length)
+          htmlAsString.slice(indexOfSecond + endString.length + 1)
         );
       }
       htmlAsString = injectHtml();
+    } else {
+      htmlAsString = htmlAsString.replace(`{{${key}}}`, object[key]);
     }
-    htmlAsString = htmlAsString.replace(`{{${key}}}`, object[key]);
   }
   return htmlAsString;
 }
@@ -53,4 +46,4 @@ function appendTemplate(htmlAsString, domElement) {
   domElement.insertAdjacentHTML('beforeend', htmlAsString);
 }
 
-export { loadTemplate, populateTemplate, appendTemplate };
+export { populateTemplate, appendTemplate };

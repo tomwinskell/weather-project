@@ -1,11 +1,9 @@
-import {
-  appendTemplate,
-  populateTemplate,
-  loadTemplate,
-} from './templateMethods.js';
+import { appendTemplate, populateTemplate } from './templateMethods.js';
 import { forecastButton, defaultButton } from './elementScripts.js';
 import { weatherData } from './handlers.js';
 import { buildFxObject, buildWxObject } from './buildObjects.js';
+import weatherTemplate from '../templates/weather.html';
+import forecastTemplate from '../templates/forecast.html';
 
 const wxDiv = document.getElementById('wx');
 
@@ -13,19 +11,16 @@ async function renderWx() {
   // clear last data
   wxDiv.innerHTML = '';
 
-  await loadPopulateAppend(buildWxObject(weatherData), 'weather');
-  await loadPopulateAppend(buildFxObject(weatherData), 'forecast');
+  await loadPopulateAppend(buildWxObject(weatherData), weatherTemplate);
+  await loadPopulateAppend(buildFxObject(weatherData), forecastTemplate);
 
   // load scripts specific to elements just loaded to dom
   forecastButton();
   defaultButton();
 }
 
-async function loadPopulateAppend(dataObject, string) {
-  appendTemplate(
-    populateTemplate(dataObject, await loadTemplate(string)),
-    wxDiv
-  );
+async function loadPopulateAppend(dataObject, htmlAsString) {
+  appendTemplate(populateTemplate(dataObject, htmlAsString), wxDiv);
 }
 
 export { renderWx };

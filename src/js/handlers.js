@@ -18,7 +18,7 @@ function handleInput() {
   if (!isLoaded(cities)) {
     return;
   }
-  renderDropdown(filter(cities.data, query));
+  renderDropdown(filter(cities, query));
   input.classList.remove('is-invalid');
 }
 
@@ -26,7 +26,7 @@ async function handleSubmit(query = input.value.toLowerCase()) {
   dropdown.classList.add('d-none');
   if (typeof query === 'string') {
     // validate the users input using list of cities
-    const valid = validateInput(cities.data, query);
+    const valid = validateInput(cities, query);
     if (valid) {
       await setWeatherData(await getLatLon(valid));
       renderWx(weatherData, valid);
