@@ -1,6 +1,6 @@
 // pass filename, returns html as string
 async function loadTemplate(filename) {
-  const res = await fetch(`./${filename}.html`);
+  const res = await fetch(`../templates/${filename}.html`);
   return await res.text();
 }
 

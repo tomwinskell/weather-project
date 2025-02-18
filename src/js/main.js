@@ -1,3 +1,7 @@
+// Import our custom CSS
+import '../scss/styles.scss'
+// Import all of Bootstrap's JS
+import * as bootstrap from 'bootstrap'
 import fetchData from './fetchData.js';
 import { deviceCoords } from './geoLocation.js';
 import { handleInput, handleSubmit } from './handlers.js';
@@ -11,7 +15,7 @@ let cities;
 
 // load cities from json
 async function main() {
-  cities = await fetchData(true, './cities.json');
+  cities = await fetchData(true, 'cities.json');
   renderOnLoad();
 
   function renderOnLoad() {
