@@ -5,7 +5,7 @@ import { reduceForecastData } from './reduceForecastData.js';
 async function getLatLon(city) {
   const latLon = await fetchData(
     city,
-    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${WX_API_KEY}`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${WX_API_KEY}`
   );
   return { lat: latLon.data[0].lat, lon: latLon.data[0].lon };
 }

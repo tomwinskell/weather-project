@@ -4,6 +4,10 @@ This project has been created by a student at Parsity, an online software engine
 
 If you have any questions about this project or the program in general, visit [parsity.io](https://parsity.io/) or email hello@parsity.io.
 
+## Live Demo
+
+Live demo at [https://tomwinskell.github.io/weather-project/](https://tomwinskell.github.io/weather-project/)
+
 ## Tech Stack
 
 - **Frontend**: HTML, CSS, JavaScript (ES6+)
@@ -33,6 +37,7 @@ weather-project/
 ## Setup Instructions
 
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/tomwinskell/weather-project.git
    cd weather-project
@@ -40,12 +45,14 @@ weather-project/
 
 2. **Install Dependencies**:
    Ensure you have Node.js and npm installed. Then, run:
+
    ```bash
    npm install
    ```
 
 3. **API Key Configuration**:
    Obtain an API key from [OpenWeatherMap](https://openweathermap.org/api) and configure it in your project:
+
    - Create a `config.js` file in `/variables` directory:
      ```
      WX_API_KEY=your_openweathermap_api_key
@@ -54,9 +61,11 @@ weather-project/
 
 4. **Build the Project**:
    To bundle the JavaScript modules and prepare the project for deployment:
+
    ```bash
    npm run build
    ```
+
    This will generate the `dist/` directory with the compiled files.
 
 5. **Start the Development Server**:
@@ -72,9 +81,11 @@ To deploy the application:
 
 1. **Build for Production**:
    Ensure the code is optimized for production:
+
    ```bash
    npm run build
    ```
+
    This updates the `dist/` directory with the latest production-ready code.
 
 2. **Serve the `dist/` Directory**:
