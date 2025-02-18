@@ -1,4 +1,4 @@
-import { weatherData } from './handlers.js';
+import { weatherData, renderPage } from './handlers.js';
 import { createToast } from './helperFunctions.js';
 
 function forecastButton() {
@@ -31,4 +31,13 @@ function defaultButton() {
   }
 }
 
-export { forecastButton, defaultButton };
+function clearDefault() {
+  const button = document.getElementById('clearDefault');
+
+  button.addEventListener('click', () => {
+    localStorage.clear();
+    renderPage();
+  });
+}
+
+export { forecastButton, defaultButton, clearDefault };

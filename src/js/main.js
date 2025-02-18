@@ -1,6 +1,4 @@
-// import fetchData from './fetchData.js';
-import { deviceCoords } from './geoLocation.js';
-import { handleInput, handleSubmit } from './handlers.js';
+import { handleInput, handleSubmit, renderPage } from './handlers.js';
 import cities from '../assets/cities.json';
 
 const input = document.getElementById('search');
@@ -8,16 +6,7 @@ const dropdown = document.getElementById('dropdown');
 const button = document.getElementById('submit');
 
 async function main() {
-  renderOnLoad();
-
-  function renderOnLoad() {
-    const latLon = JSON.parse(localStorage.getItem('latLon'));
-    if (!latLon) {
-      deviceCoords();
-    } else {
-      handleSubmit(latLon);
-    }
-  }
+  renderPage();
 }
 
 main();
@@ -28,4 +17,4 @@ input.addEventListener('keyup', (e) => e.key === 'Enter' && handleSubmit());
 
 button.addEventListener('click', () => handleSubmit());
 
-export { input, dropdown, cities };
+export { input, dropdown, cities, renderPage };

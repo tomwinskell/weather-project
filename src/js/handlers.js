@@ -3,6 +3,7 @@ import { getWxData, getLatLon } from './getWx.js';
 import { renderWx } from './renderWx.js';
 import { renderDropdown, filter } from './dropdown.js';
 import { input, cities } from './main.js';
+import { deviceCoords } from './geoLocation.js';
 
 // weatherData from fetch
 let weatherData;
@@ -43,4 +44,13 @@ async function handleSubmit(query = input.value.toLowerCase()) {
   }
 }
 
-export { handleInput, handleSubmit, weatherData };
+function renderPage() {
+  const latLon = JSON.parse(localStorage.getItem('latLon'));
+  if (!latLon) {
+    deviceCoords();
+  } else {
+    handleSubmit(latLon);
+  }
+}
+
+export { handleInput, handleSubmit, renderPage, weatherData };

@@ -1,5 +1,9 @@
 import { appendTemplate, populateTemplate } from './templateMethods.js';
-import { forecastButton, defaultButton } from './elementScripts.js';
+import {
+  forecastButton,
+  defaultButton,
+  clearDefault,
+} from './elementScripts.js';
 import { weatherData } from './handlers.js';
 import { buildFxObject, buildWxObject } from './buildObjects.js';
 import weatherTemplate from '../templates/weather.html';
@@ -17,6 +21,7 @@ async function renderWx() {
   // load scripts specific to elements just loaded to dom
   forecastButton();
   defaultButton();
+  clearDefault();
 }
 
 async function loadPopulateAppend(dataObject, htmlAsString) {
